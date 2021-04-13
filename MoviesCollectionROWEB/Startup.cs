@@ -26,12 +26,12 @@ namespace MoviesCollectionROWEB
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            var connection = @"Server=(localdb)\mssqllocaldb;Database=MvcMovieContext-1;Trusted_Connection=True;ConnectRetryCount=0";
+            /*var connection = @"Server=(localdb)\mssqllocaldb;Database=MvcMovieContext-1;Trusted_Connection=True;ConnectRetryCount=0";
             services.AddDbContext<MvcMovieContext>
-                (options => options.UseSqlServer(connection));
-            /*services.AddDbContext<MvcMovieContext>(options =>
+                (options => options.UseSqlServer(connection));*/
+            services.AddDbContext<MvcMovieContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("MvcMovieContext")));
-            */
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

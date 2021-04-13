@@ -10,14 +10,14 @@ using MoviesCollectionROWEB.Data;
 namespace MoviesCollectionROWEB.Migrations
 {
     [DbContext(typeof(MvcMovieContext))]
-    [Migration("20210412201137_InitialCreate")]
+    [Migration("20210413173518_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.11")
+                .HasAnnotation("ProductVersion", "3.1.14")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
