@@ -1,9 +1,11 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MoviesCollectionROWEB.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +26,12 @@ namespace MoviesCollectionROWEB
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            var connection = @"Server=(localdb)\mssqllocaldb;Database=MvcMovieContext-1;Trusted_Connection=True;ConnectRetryCount=0";
+            services.AddDbContext<MvcMovieContext>
+                (options => options.UseSqlServer(connection));
+            /*services.AddDbContext<MvcMovieContext>(options =>
+            options.UseSqlServer(Configuration.GetConnectionString("MvcMovieContext")));
+            */
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
