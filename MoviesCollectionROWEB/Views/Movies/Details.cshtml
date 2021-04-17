@@ -36,6 +36,7 @@
         </dd>
     </dl>
 </div>
+
 <div>
     <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
     <a asp-action="Index">Back to List</a>
@@ -77,14 +78,12 @@
 <form asp-action="AddReview">
     <input type="hidden" name="movieId" value="@Model.Id" />
     <div>
-        <label>Name</label>
+        <label style="margin-left:3px;">Name</label>
         <input name="Name" />
     </div>
     <div>
         <label style="margin-right:3px;">Review</label>
         <textarea name="Content" cols="30" rows="5" style="margin-left:-6px;"></textarea>
     </div>
-    <button>Send Review</button>
+    <button class="btn btn-primary">Send review</button>
 </form>
-
-<a asp-controller="Home" asp-action="Privacy" class="btn btn-primary">Test</a>

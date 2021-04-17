@@ -22,8 +22,8 @@ namespace MoviesCollectionROWEB.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ReviewDate = table.Column<DateTime>(nullable: false),
-                    Name = table.Column<string>(nullable: true),
-                    Content = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(nullable: false),
+                    Content = table.Column<string>(nullable: false),
                     MovieId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
