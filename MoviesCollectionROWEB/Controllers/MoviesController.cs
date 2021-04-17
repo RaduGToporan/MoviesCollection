@@ -65,7 +65,7 @@ namespace MoviesCollectionROWEB.Controllers
                 return NotFound();
             }
 
-            var movie = await _context.Movie
+            var movie = await _context.Movie.Include(m => m.Reviews)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (movie == null)
             {
@@ -73,6 +73,17 @@ namespace MoviesCollectionROWEB.Controllers
             }
 
             return View(movie);
+        }
+
+        public async Task<IActionResult> AddReview(int movieId , Review review)
+        {
+            var movie = await _context.Movie.Include(m => m.Reviews)
+                .FirstOrDefaultAsync(m => m.Id == movieId);
+            movie.Reviews.Add(review);
+            _context.Movie.Update(movie);
+            _context.SaveChanges();
+            return RedirectToAction("Details", new { id = movieId });
+
         }
 
         // GET: Movies/Create
@@ -172,6 +183,15 @@ namespace MoviesCollectionROWEB.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var movie = await _context.Movie.FindAsync(id);
+
+            List<Review> reviewsToDelete = await _context.Reviews
+                .Where(x => x.MovieId == id)
+                .ToListAsync();
+            foreach (var rev in reviewsToDelete)
+            {
+                _context.Reviews.Remove(rev);
+                await _context.SaveChangesAsync();
+            }
             _context.Movie.Remove(movie);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
