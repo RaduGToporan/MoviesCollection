@@ -3,10 +3,10 @@
 @model PaginatedList<Movie>
 
 @{
-    ViewData["Title"] = "Suppliers";
+    ViewData["Title"] = "Movies";
 }
 
-<h2>Suppliers</h2>
+<h2>Movies</h2>
 
 
 <p>
@@ -62,3 +62,6 @@
 {
     <a asp-action="Index" asp-route-page="@i" style="margin-right:10px;border : 3px solid #eee;padding : 5px 5px;">@i</a>
 }
+<br>
+<br>
+<a asp-controller="Movies" asp-action="Search" class="btn btn-primary">Search</a>
