@@ -40,3 +40,51 @@
     <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Reviews[0].Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Reviews[0].Content)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Reviews[0].ReviewDate)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Reviews)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Content)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ReviewDate)
+                </td>
+                
+            </tr>
+        }
+    </tbody>
+</table>
+
+<form asp-action="AddReview">
+    <input type="hidden" name="movieId" value="@Model.Id" />
+    <div>
+        <label>Name</label>
+        <input name="Name" />
+    </div>
+    <div>
+        <label style="margin-right:3px;">Review</label>
+        <textarea name="Content" cols="30" rows="5" style="margin-left:-6px;"></textarea>
+    </div>
+    <button>Send Review</button>
+</form>
+
+<a asp-controller="Home" asp-action="Privacy" class="btn btn-primary">Test</a>

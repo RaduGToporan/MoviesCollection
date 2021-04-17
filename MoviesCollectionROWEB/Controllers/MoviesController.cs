@@ -65,7 +65,7 @@ namespace MoviesCollectionROWEB.Controllers
                 return NotFound();
             }
 
-            var movie = await _context.Movie
+            var movie = await _context.Movie.Include(m => m.Reviews)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (movie == null)
             {
@@ -73,6 +73,17 @@ namespace MoviesCollectionROWEB.Controllers
             }
 
             return View(movie);
+        }
+
+        public async Task<IActionResult> AddReview(int movieId , Review review)
+        {
+            var movie = await _context.Movie.Include(m => m.Reviews)
+                .FirstOrDefaultAsync(m => m.Id == movieId);
+            movie.Reviews.Add(review);
+            _context.Movie.Update(movie);
+            _context.SaveChanges();
+            return RedirectToAction("Details", new { id = movieId });
+
         }
 
         // GET: Movies/Create
