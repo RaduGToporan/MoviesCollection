@@ -1,39 +1,46 @@
-﻿@*@model ReflectionIT.Mvc.Paging.PagingList<MoviesCollectionROWEB.Models.MovieGenreViewModel>*@
-@*@using ReflectionIT.Mvc.Paging*@
-@model PaginatedList<Movie>
+﻿@model MoviesCollectionROWEB.Models.MovieGenreViewModel
 
 @{
-    ViewData["Title"] = "Suppliers";
+    ViewData["Title"] = "Search";
 }
 
-<h2>Suppliers</h2>
-
+<h1>Search</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+<form asp-controller="Movies" asp-action="Search" method="get">
+    <p>
 
+        <select asp-for="MovieGenre" asp-items="Model.Genres">
+            <option value="">All</option>
+        </select>
+
+        Title: <input type="text" asp-for="SearchString" />
+        <input type="submit" value="Filter" />
+    </p>
+</form>
 
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model[0].Title)
+                @Html.DisplayNameFor(model => model.Movies[0].Title)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model[0].ReleaseDate)
+                @Html.DisplayNameFor(model => model.Movies[0].ReleaseDate)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model[0].Genre)
+                @Html.DisplayNameFor(model => model.Movies[0].Genre)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model[0].Price)
+                @Html.DisplayNameFor(model => model.Movies[0].Price)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+        @foreach (var item in Model.Movies)
         {
             <tr>
                 <td>
@@ -57,8 +64,3 @@
         }
     </tbody>
 </table>
-
-@for (int i = 1; i <= Model.TotalPages; i++)
-{
-    <a asp-action="Index" asp-route-page="@i" style="margin-right:10px;border : 3px solid #eee;padding : 5px 5px;">@i</a>
-}

@@ -19,8 +19,16 @@ namespace MoviesCollectionROWEB.Controllers
             _context = context;
         }
 
+        public async Task<IActionResult> Index(int page = 1)
+        {
+            var qry = _context.Movie.AsNoTracking().OrderBy(p => p.Id);
+            int pageSize = 2;
+            var model = await PaginatedList<Movie>.CreateAsync(qry, page, pageSize);
+            return View(model);
+        }
+
         // GET: Movies
-        public async Task<IActionResult> Index(string movieGenre, string searchString)
+        public async Task<IActionResult> Search(string movieGenre, string searchString)
         {
             // Use LINQ to get list of genres.
             IQueryable<string> genreQuery = from m in _context.Movie
