@@ -183,6 +183,15 @@ namespace MoviesCollectionROWEB.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var movie = await _context.Movie.FindAsync(id);
+
+            List<Review> reviewsToDelete = await _context.Reviews
+                .Where(x => x.MovieId == id)
+                .ToListAsync();
+            foreach (var rev in reviewsToDelete)
+            {
+                _context.Reviews.Remove(rev);
+                await _context.SaveChangesAsync();
+            }
             _context.Movie.Remove(movie);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
